@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Name Valuator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Domain Name Valuator</h1>
+
+    <form>
+        <label>Enter Domain Name:</label>
+        <input type="text" id="domainName" name="domainName" placeholder="ex: NewyorkLawyer.com" class="domain-input">
+        <input type="button" id="checkDomainAvailability" value="Check Availability">
+    </form>
+
+    <div>
+        <label>Domain SV & CPC:</label>
+        <input type="button" value="Check" onclick="openKeywordPlanner()">
+        <input type="number" id="sv" placeholder="SV">
+        <br>
+        <span id="sv-tick"></span>
+        <input type="number" id="cpc" placeholder="CPC $">
+        <span id="cpc-tick"></span>
+    </div>
+
+    <div>
+        <label>Google Maps Pages:</label>
+        <input type="button" value="Check" onclick="openGoogleMapsPages()">
+        <input type="number" id="google-maps-pages" placeholder="">
+        <span id="google-maps-pages-tick"></span>
+    </div>
+
+    <div>
+        <label>City Population:</label>
+        <input type="button" value="Check" onclick="openCityPopulationSearch()">
+        <input type="number" id="city-population">
+        <span id="city-population-tick"></span>
+    </div>
+
+    <div>
+        <label>Godaddy Appraisal:</label>
+        <input type="button" value="Check" onclick="openAppraisal()">
+        <input type="number" id="godaddy-appraisal" placeholder="$">
+        <span id="godaddy-appraisal-tick"></span>
+    </div>
+
+    <div>
+        <label>Check Similar Sales:</label>
+        <input type="button" value="Check" onclick="openNamebio()">
+        <input type="text" placeholder="">
+    </div>
+
+    <div>
+        <label>Who owned it before?</label>
+        <input type="button" value="Check" onclick="whois()">
+        <input type="text" placeholder="">
+    </div>
+
+    <script src="logic.js"></script>
+    <script>
+
+
+        // Function to update the tick icon based on the input value
+function updateTick(inputId, thresholdValue, tickId) {
+    const inputValue = document.getElementById(inputId).value;
+    const tickElement = document.getElementById(tickId);
+    if (inputValue >= thresholdValue) {
+        tickElement.innerHTML = '✅'; // Yes tick
+    } else {
+        tickElement.innerHTML = '❌'; // No tick
+    }
+}
+
+        // Event listeners for input changes
+        document.getElementById('sv').addEventListener('input', function() {
+            updateTick('sv', 1000, 'sv-tick');
+        });
+
+        document.getElementById('cpc').addEventListener('input', function() {
+            updateTick('cpc', 1, 'cpc-tick');
+        });
+
+        document.getElementById('google-maps-pages').addEventListener('input', function() {
+            updateTick('google-maps-pages', 10, 'google-maps-pages-tick');
+        });
+
+        document.getElementById('city-population').addEventListener('input', function() {
+            updateTick('city-population', 100000, 'city-population-tick');
+        });
+
+        document.getElementById('godaddy-appraisal').addEventListener('input', function() {
+            updateTick('godaddy-appraisal', 700, 'godaddy-appraisal-tick');
+        });
+    </script>
+</body>
+</html>
