@@ -1,3 +1,5 @@
+
+
 // Function to open the Google Maps search for the full domain name
 function openGoogleMapsPages() {
     const domainName = document.getElementById('domainName').value.trim();
@@ -82,6 +84,17 @@ function openNamebio() {
     window.open(url, '_blank');
 }
 
+function openNamebio() {
+    const domainName = document.getElementById('domainName').value.trim();
+    if (!domainName) {
+        alert("Please enter a domain name.");
+        return;
+    }
+    const keyword = getFirstWord(domainName);
+    const url = `https://dotdb.com/search?keyword=${domainName}.com&position=any`;
+    window.open(url, '_blank');
+}
+
 function whois() {
     const domainName = document.getElementById('domainName').value.trim();
     if (!domainName) {
@@ -89,5 +102,15 @@ function whois() {
         return;
     }
     const url = `https://www.whoxy.com/${encodeURIComponent(domainName)}`;
+    window.open(url, '_blank');  // Open the URL in a new tab
+}
+
+function arch() {
+    const domainName = document.getElementById('domainName').value.trim();
+    if (!domainName) {
+        alert("Please enter a domain name.");
+        return;
+    }
+    const url = `https://web.archive.org/web/20240000000000*/${domainName}`;
     window.open(url, '_blank');  // Open the URL in a new tab
 }
