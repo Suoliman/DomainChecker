@@ -12,13 +12,13 @@
     <form>
         <label>Enter Domain Name:</label>
         <input type="text" id="domainName" name="domainName" placeholder="ex: NewyorkLawyer.com" class="domain-input">
-        <input type="button" id="checkDomainAvailability" value="Check Availability">
+        <input type="submit" id="checkDomainAvailability" value="Check Availability">
     </form>
 
     <div>
         <label>Domain SV & CPC:</label>
         <input type="button" value="Check" onclick="openKeywordPlanner()">
-        <input type="number" id="sv" placeholder="SV">
+        <input type="text" id="sv" placeholder="SV">
         <br>
         <span id="sv-tick"></span>
         <input type="number" id="cpc" placeholder="CPC $">
@@ -53,8 +53,20 @@
     </div>
 
     <div>
+        <label>Check Similar Domains:</label>
+        <input type="button" value="Check" onclick="openNamebio()">
+        <input type="text" placeholder="">
+    </div>
+
+    <div>
         <label>Who owned it before?</label>
         <input type="button" value="Check" onclick="whois()">
+        <input type="text" placeholder="">
+    </div>
+
+    <div>
+        <label>Check Domain Archive: </label>
+        <input type="button" value="Check" onclick="arch()">
         <input type="text" placeholder="">
     </div>
 
