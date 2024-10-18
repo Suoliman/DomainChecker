@@ -70,7 +70,7 @@ function openAppraisal() {
         return;
     }
     const keyword = getFirstWord(domainName);
-    const url = `https://ca.godaddy.com/domain-value-appraisal/appraisal/${domainName}`;
+    const url = `https://ca.godaddy.com/domain-value-appraisal/appraisal/`;
     window.open(url, '_blank');
 }
 
@@ -92,7 +92,7 @@ function openNamebio() {
         return;
     }
     const keyword = getFirstWord(domainName);
-    const url = `https://dotdb.com/search?keyword=${domainName}.com&position=any`;
+    const url = `https://namebio.com/?keyword=${encodeURIComponent(keyword)}`;
     window.open(url, '_blank');
 }
 
