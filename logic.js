@@ -52,7 +52,8 @@ function getFirstWord(str) {
 }
 
 // Event listener for domain availability check
-document.getElementById('checkDomainAvailability').addEventListener('click', function() {
+document.getElementById('checkDomainAvailability').addEventListener('click', function(event) {
+    event.preventDefault();  // Prevent the default form submit/refresh behavior
     const domainName = document.getElementById('domainName').value.trim();
     if (!domainName) {
         alert("Please enter a domain name.");
