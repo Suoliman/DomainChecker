@@ -9,6 +9,19 @@
 <body>
     <h1>Domain Name Tools</h1>
 
+
+    <button id="toggleHistoryButton" onclick="toggleHistory()">Show Saved Domains</button>
+    <div id="history" style="display: none;">
+        <h2>Saved Domains</h2>
+        <ul id="historyList"></ul>
+    </div>
+
+    
+    <button id="toggleHistoryButton" onclick="toggleHistory()">Show Saved Domains</button>
+    <div id="history" style="display: none;">
+        <ul id="history"></ul>
+    </div>
+
     <form>
         <label>Enter Domain Name:</label>
         <input type="text" id="domainName" name="domainName" placeholder="ex: NewyorkLawyer.com" class="domain-input">
@@ -48,44 +61,58 @@
 
     <div>
         <label>Check Similar Sales (*dotdb):</label>
-        <input type="button" value="Check" onclick="openNamebio()">
-        <input type="text" placeholder="">
+        <input type="button" value="Check" onclick="dotdb()">
+        <input type="text" id="dotdb" placeholder="$">
+        <span id="dotdb-tick"></span>
     </div>
 
     <div>
         <label>Check Similar Domains (*NameBio):</label>
         <input type="button" value="Check" onclick="openNamebio()">
-        <input type="text" placeholder="">
+        <input type="text" placeholder="" id="NameBio"> 
+        <span id="NameBio-tick"></span>
     </div>
 
     <div>
         <label>Who owned it before? (*Whois):</label>
         <input type="button" value="Check" onclick="whois()">
-        <input type="text" placeholder="">
+        <input type="text" placeholder="" id="whois">
+        <span id="whois-tick"></span>
     </div>
 
     <div>
-        <label>Check Domain Archive (*web.archive): </label>
+        <label>Check Domain Archive (*web.archive):</label>
         <input type="button" value="Check" onclick="arch()">
-        <input type="text" placeholder="">
+        <input type="text" placeholder="" id="archive">
+        <span id="archive"></span>
+    </div>
+
+    <div>
+        <label>Save your domain info:</label>
+        <button id="saveData" onclick="saveInfo()">Save Info</button>
     </div>
 
     <script src="logic.js"></script>
     <script>
+        function toggleHistory() {
+            var historyDiv = document.getElementById("history");
+            if (historyDiv.style.display === "none") {
+                historyDiv.style.display = "block";
+            } else {
+                historyDiv.style.display = "none";
+            }
+        }
 
+        function updateTick(inputId, thresholdValue, tickId) {
+            const inputValue = document.getElementById(inputId).value;
+            const tickElement = document.getElementById(tickId);
+            if (inputValue >= thresholdValue) {
+                tickElement.innerHTML = '✅';
+            } else {
+                tickElement.innerHTML = '❌';
+            }
+        }
 
-        // Function to update the tick icon based on the input value
-function updateTick(inputId, thresholdValue, tickId) {
-    const inputValue = document.getElementById(inputId).value;
-    const tickElement = document.getElementById(tickId);
-    if (inputValue >= thresholdValue) {
-        tickElement.innerHTML = '✅'; // Yes tick
-    } else {
-        tickElement.innerHTML = '❌'; // No tick
-    }
-}
-
-        // Event listeners for input changes
         document.getElementById('sv').addEventListener('input', function() {
             updateTick('sv', 1000, 'sv-tick');
         });
@@ -105,6 +132,34 @@ function updateTick(inputId, thresholdValue, tickId) {
         document.getElementById('godaddy-appraisal').addEventListener('input', function() {
             updateTick('godaddy-appraisal', 700, 'godaddy-appraisal-tick');
         });
+
+        document.getElementById('dotdb').addEventListener('input', function() {
+            updateTick('dotdb', 700, 'dotdb-tick');
+        });
+
+        document.getElementById('NameBio').addEventListener('input', function() {
+            updateTick('NameBio', 700, 'NameBio-tick');
+        });
+         
+        document.getElementById('whois').addEventListener('input', function() {
+            updateTick('whois', 700, 'whois-tick');
+        });
+
+        document.getElementById('archive').addEventListener('input', function() {
+            updateTick('archive', 700, 'archive-tick');
+        });
+
+         // Function to delete a domain from the list
+         function deleteDomain(index) {
+            let history = JSON.parse(localStorage.getItem('domainHistory')) || [];
+            history.splice(index, 1);
+            localStorage.setItem('domainHistory', JSON.stringify(history));
+            displayHistory();
+        }
+
+        // Display history when the page loads
+        window.onload = displayHistory;
+        
     </script>
 </body>
 </html>
